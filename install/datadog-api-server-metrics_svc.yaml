@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
+    ad.datadoghq.com/endpoints.init_configs: '[{}]'
+    ad.datadoghq.com/endpoints.instances: '[{"prometheus_url":"%%host%%:6443/metrics",
+      "bearer_token_auth": true, "ssl_ca_cert": false}]'
+    ad.datadoghq.com/service.check_names: '[""]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: '[{}]'
+  labels:
+    app: datadog
+  name: datadog-api-server-metrics
+spec:
+  ports:
+  - name: agentport
+    port: 6443
+    protocol: TCP
+    targetPort: 6443
+  selector:
+    app: datadog-master-node-pause
+  sessionAffinity: None
+  type: ClusterIP

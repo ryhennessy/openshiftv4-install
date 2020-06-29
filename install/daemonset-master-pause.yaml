@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog-daemonset-master-pause
+spec:
+  selector:
+    matchLabels:
+      app: datadog-master-node-pause
+  template:
+    metadata:
+      labels:
+        app: datadog-master-node-pause
+      name: datadog-master-node-pause
+    spec: 
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      containers:
+      - name: daemon
+        image: k8s.gcr.io/pause:3.1
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      serviceAccount: datadog
+      serviceAccountName: datadog
+      tolerations:
+      - effect: NoSchedule
+        key: node.kubernetes.io/disk-pressure
+        operator: Exists
+      - effect: NoSchedule
+        key: node.kubernetes.io/unschedulable
+        operator: Exists
+      - operator: Exists
+      - effect: NoExecute
+        key: node.kubernetes.io/not-ready
+        operator: Exists
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+      - effect: NoSchedule
+        key: node.kubernetes.io/memory-pressure
+        operator: Exists
