@@ -1,5 +1,7 @@
 # OpenShift Install
 
+[![IaC](https://app.soluble.cloud/api/v1/public/badges/ff30d9bc-e72e-405d-ab72-af397117e392.svg)](https://app.soluble.cloud/repos/details/github.com/ryhennessy/openshiftv4-install)  [![CIS](https://app.soluble.cloud/api/v1/public/badges/81d3d726-f94d-4948-a2a7-2f329c1f27bf.svg)](https://app.soluble.cloud/repos/details/github.com/ryhennessy/openshiftv4-install)  
+
 * source .credentials.aws.sh (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env vars)
 
 * download `openshift-install` binary and run ```./openshift-install create install-config```
